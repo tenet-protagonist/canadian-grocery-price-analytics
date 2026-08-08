@@ -34,8 +34,8 @@ conn = snowflake.connector.connect(
     schema = os.environ["SNOWFLAKE_SCHEMA"],
 )
 
+# Stream the archive to disk (keep off RAM; deleted after loading)
 def download(url: str, dest: Path) -> None:
-    """Stream the archive to disk (keep off RAM; deleted after loading)"""
     dest.parent.mkdir(parents=True, exist_ok=True)
     print(f"Downloading {url}")
     with requests.get(url, stream=True, timeout=600) as r:
@@ -45,8 +45,8 @@ def download(url: str, dest: Path) -> None:
                 f.write(block)
     print(f"  saved {dest} ({dest.stat().st_size / 1e6:.0f} MB)")
 
+# Find the CSV file inside archive with name that contains `keyword`
 def find_member(z: zipfile.ZipFile, keyword: str) -> str:
-    """Find the CSV file inside archive with name that contains `keyword`"""
     for name in z.namelist():
         if name.lower().endswith(".csv") and keyword in name.lower():
             return name
@@ -54,28 +54,28 @@ def find_member(z: zipfile.ZipFile, keyword: str) -> str:
         f"No CSV containing '{keyword}'. Archive contents: {z.namelist()}"
     )
 
+# Latest value of `col` already in RAW.<table>, or None if empty / not yet created
 def get_watermark(table: str, col: str):
-    """Latest value of `col` already in RAW.<table>, or None if empty / not yet created"""
     cur = conn.cursor()
     try:
         cur.execute(f"SELECT MAX(TRY_TO_TIMESTAMP({col})) FROM RAW.{table}")
         return cur.fetchone()[0]
     except snowflake.connector.errors.ProgrammingError:
-        return None   # table doesn't exist yet -> first run
+        return None  # table doesn't exist yet -> first run
     finally:
         cur.close()
 
+# Yield uppercased-column string DataFrames read straight from the archive
 def read_chunks(z: zipfile.ZipFile, member: str):
-    """Yield uppercased-column string DataFrames read straight from the archive"""
     with z.open(member) as raw_f:
         text_f = io.TextIOWrapper(raw_f, encoding="utf-8-sig")  # strips the BOM
         # dtype=str -> land everything as text (RAW layer); dbt casts types later
         for chunk in pd.read_csv(text_f, dtype=str, chunksize=CHUNK_SIZE):
             chunk.columns = [c.strip().upper() for c in chunk.columns]
-            yield chunk
+            yield chunk.reset_index(drop=True)
 
+# Overwrite RAW.<table> with the whole file
 def load_full(z: zipfile.ZipFile, member: str, table: str) -> None:
-    """Overwrite RAW.<table> with the whole file"""
     print(f"\n[full refresh] {member} -> RAW.{table}")
     total, created = 0, False
     for i, chunk in enumerate(read_chunks(z, member)):
@@ -89,8 +89,8 @@ def load_full(z: zipfile.ZipFile, member: str, table: str) -> None:
         print(f"  chunk {i + 1}: +{n:,} rows (total {total:,})")
     print(f"  done: {total:,} rows")
 
+# if `wcol` is newer than what's already in RAW.<table> -> append rows
 def load_incremental(z: zipfile.ZipFile, member: str, table: str, wcol: str) -> None:
-    """`wcol` is newer than what's already in RAW.<table> -> append rows"""
     watermark = get_watermark(table, wcol)
     mode = "first load (backfill)" if watermark is None else f"new rows where {wcol} > {watermark}"
     print(f"\n[incremental] {member} -> RAW.{table} ({mode})")
