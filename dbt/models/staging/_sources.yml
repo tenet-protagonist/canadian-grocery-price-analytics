@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw
+    database: GROCERY_DB
+    schema: RAW
+    description: "Raw data landed from Project Hammer after ingestion"
+    tables:
+      - name: PRODUCT
+        description: "Product metadata (full refresh each run). id regenerates daily"
+      - name: PRICE
+        description: "Price observations (incremental by NOWTIME)."
