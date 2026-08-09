@@ -8,20 +8,16 @@ cleaned AS (
         -- join key to prices within a day; id regenerates daily
         TRIM(id) AS product_daily_id,
 
-        -- descriptive attributes, trimmed and standardised
         LOWER(TRIM(vendor)) AS vendor,
         TRIM(product_name) AS product_name,
         NULLIF(TRIM(brand), '') AS brand,
         NULLIF(TRIM(units), '') AS units,
-
-        -- stable identifiers (kept as text so leading zeros survive)
         NULLIF(TRIM(sku), '') AS sku,
         NULLIF(TRIM(upc), '') AS upc,
-
         TRIM(detail_url) AS detail_url
-
     FROM source
     WHERE id IS NOT NULL
 )
 
-SELECT * FROM cleaned
+SELECT *
+FROM cleaned

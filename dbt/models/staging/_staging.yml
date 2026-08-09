@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: "Cleaned product metadata from Project Hammer: text trimmed, vendor lowercased, empty strings nulled; id regenerates daily"
+    columns:
+      - name: product_daily_id
+        description: "Per-day product id; join key to stg_prices within the same day"
+        tests:
+          - not_null
+      - name: vendor
+        description: "Retailer name, lowercased"
+      - name: product_name
+        description: "Product name (trimmed)"
+      - name: sku
+        description: "Stable identifier where present (often empty in this source)"
+      - name: upc
+        description: "Barcode where present (reliability varies by vendor)"
+
+  - name: stg_prices
+    description: "Cleaned, typed, deduplicated product prices; each row is classified by pricing format; current_price is a decimal only for plain prices"
+    columns:
+      - name: product_daily_id
+        description: "Join key to stg_products within the same day"
+        tests:
+          - not_null
+      - name: observed_at
+        description: "Parsed scrape timestamp; failed rows dropped"
+        tests:
+          - not_null
+      - name: price_format
+        description: "plain_price (~98%) / unit_price / multi_buy / estimated / other"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['plain_price', 'unit_price', 'multi_buy', 'estimated', 'other']
+      - name: current_price
+        description: "Current price as a decimal; non-null only for plain_price rows"
+      - name: old_price
+        description: "Previous (struck-through) price as a decimal, when present"
+      - name: is_on_sale
+        description: "True when the source showed a struck-through old price"
+        tests:
+          - not_null
