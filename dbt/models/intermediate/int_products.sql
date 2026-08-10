@@ -17,11 +17,11 @@ WITH resolved AS (
         --   1) UPC where present; 2) vendor + sku; 3) hash of vendor + name + units
         CASE
             WHEN upc IS NOT NULL
-                THEN vendor || '|upc|' || LPAD(upc, 13, '0')
+                THEN COALESCE(vendor, 'unknown') || '|upc|' || LPAD(upc, 13, '0')
             WHEN sku IS NOT NULL
-                THEN vendor || '|sku|' || sku
+                THEN COALESCE(vendor, 'unknown') || '|sku|' || sku
             ELSE
-                vendor || '|hash|' || md5(COALESCE(product_name, '') || '|' || COALESCE(units, ''))
+                COALESCE(vendor, 'unknown') || '|hash|' || md5(COALESCE(product_name, '') || '|' || COALESCE(units, ''))
         END AS stable_product_id
     FROM {{ ref('stg_products') }}
 )
