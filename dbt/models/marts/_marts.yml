@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Calendar dimension: one row per day from 2024-02-01 to current date"
+    columns:
+      - name: date_key
+        description: "Integer YYYYMMDD surrogate key"
+        tests:
+          - unique
+          - not_null
+      - name: full_date
+        description: "Calendar date"
+        tests:
+          - not_null
+
+  - name: dim_products
+    description: "Product dimension: one row per resolved product (tiered stable key), plus an 'unknown' member (product_key = '-1') for unresolved fact rows"
+    columns:
+      - name: product_key
+        description: "Surrogate key; one per real product. '-1' -> unknown member"
+        tests:
+          - unique
+          - not_null
+      - name: vendor
+        description: "Retailer, lowercased"
+        tests:
+          - not_null
+      - name: key_tier
+        description: "How the product was identified"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['upc', 'sku', 'hash', 'unknown']
+
+  - name: fct_prices
+    description: "Price fact: one row per observation, keys to product and date"
+    columns:
+      - name: product_key
+        description: "Foreign key to dim_products"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_key
+      - name: date_key
+        description: "Foreign key to dim_date"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: is_valid_price
+        description: "True for plain-format prices above zero"
+        tests:
+          - not_null

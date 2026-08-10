@@ -8,7 +8,7 @@ cleaned AS (
         -- join key to prices within a day; id regenerates daily
         TRIM(id) AS product_daily_id,
 
-        LOWER(TRIM(vendor)) AS vendor,
+        COALESCE(LOWER(TRIM(vendor)), 'unknown') AS vendor,
         TRIM(product_name) AS product_name,
         NULLIF(TRIM(brand), '') AS brand,
         NULLIF(TRIM(units), '') AS units,
