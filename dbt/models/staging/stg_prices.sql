@@ -12,7 +12,6 @@ typed AS (
         NULLIF(TRIM(old_price), '') AS old_price_raw,
         NULLIF(TRIM(price_per_unit), '') AS price_per_unit_raw,
         NULLIF(TRIM(other), '') AS status_note
-
     FROM source
 
 ),
@@ -43,7 +42,6 @@ classified AS (
         -- a struck-through old price means the item wAS on sale
         (old_price_raw IS NOT NULL) AS is_on_sale
     FROM typed
-
 ),
 
 deduped AS (
