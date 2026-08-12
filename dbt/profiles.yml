@@ -9,5 +9,5 @@ grocery:
       role: "{{ env_var('SNOWFLAKE_ROLE') }}"
       warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
       database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
-      schema: ANALYTICS
+      schema: "{{ env_var('DBT_SCHEMA', 'ANALYTICS') }}"
       threads: 4
