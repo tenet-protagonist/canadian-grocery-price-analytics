@@ -1,0 +1,5 @@
+dbt-snowflake
+snowflake-connector-python[pandas]
+pandas
+requests
+python-dotenv
