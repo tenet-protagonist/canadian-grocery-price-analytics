@@ -138,7 +138,7 @@ def main() -> None:
         with zipfile.ZipFile(ZIP_PATH) as z:
             print("\nArchive contents:", z.namelist())
             load_full(z, find_member(z, "product"), PRODUCT_TABLE)
-            load_incremental(z, find_member(z, "raw"), PRICE_TABLE, PRICE_WATERMARK_COL)
+            load_full(z, find_member(z, "raw"), PRICE_TABLE)
     finally:
         ZIP_PATH.unlink(missing_ok=True)
 

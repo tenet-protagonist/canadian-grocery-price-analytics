@@ -16,7 +16,10 @@ cleaned AS (
         NULLIF(TRIM(upc), '') AS upc,
         TRIM(detail_url) AS detail_url
     FROM source
-    WHERE id IS NOT NULL
+    WHERE id IS NOT null
+       AND vendor IS NOT null
+       AND vendor NOT LIKE '%://%'   -- drops URLs
+       AND vendor NOT LIKE '%:%'   -- drops timestamps
 )
 
 SELECT *
