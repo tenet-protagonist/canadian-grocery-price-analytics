@@ -1,0 +1,62 @@
+::group::Log message source details
+/home/linko/airflow/logs/dag_id=grocery_pipeline/run_id=manual__2026-08-11T06:40:03.579569+00:00/task_id=dbt_test/attempt=1.log
+::endgroup::
+[2026-08-11T06:55:37.289894Z] INFO - ::group::Pre Execute
+Task Identity ti_id=019fef8c-b41a-7248-add8-8b0e467f630b dag_id=grocery_pipeline task_id=dbt_test run_id=manual__2026-08-11T06:40:03.579569+00:00 try_number=1 map_index=-1
+[2026-08-11T06:55:37.751393Z] INFO - DAG bundles loaded: dags-folder
+[2026-08-11T06:55:37.765908Z] INFO - Filling up the DagBag from /home/linko/airflow/dags/grocery_pipeline.py
+[2026-08-11T06:55:37.825472Z] INFO - Worker startup parse complete bundle_name=dags-folder  bundle_version=null  dag_file=grocery_pipeline.py  bundle_prepare_ms=16  dag_file_parse_ms=59 
+[2026-08-11T06:55:37.872180Z] INFO - ::endgroup::
+[2026-08-11T06:55:37.873086Z] INFO - Tmp dir root location: /tmp
+[2026-08-11T06:55:37.873813Z] INFO - Running command: ['/usr/bin/bash', '-c', 'cd /mnt/d/Github/canadian-grocery-price-analytics/dbt && set -a && . /mnt/d/Github/canadian-grocery-price-analytics/.env && set +a && export DBT_PROFILES_DIR=/mnt/d/Github/canadian-grocery-price-analytics/dbt && /home/linko/pipeline-venv/bin/dbt test']
+[2026-08-11T06:55:37.874734Z] INFO - Output:
+[2026-08-11T06:55:40.330061Z] INFO - [0m06:55:40  Running with dbt=1.12.0
+[2026-08-11T06:55:41.592266Z] INFO - [0m06:55:41  Registered adapter: snowflake=1.12.0
+[2026-08-11T06:55:43.195245Z] INFO - [0m06:55:43  Found 6 models, 17 data tests, 2 sources, 661 macros
+[2026-08-11T06:55:43.205830Z] INFO - [0m06:55:43
+[2026-08-11T06:55:43.208320Z] INFO - [0m06:55:43  Concurrency: 4 threads (target='dev')
+[2026-08-11T06:55:43.210073Z] INFO - [0m06:55:43
+[2026-08-11T06:55:45.671443Z] INFO - [0m06:55:45  4 of 17 START test not_null_dim_date_full_date ................................. [RUN]
+[2026-08-11T06:55:45.673691Z] INFO - [0m06:55:45  3 of 17 START test not_null_dim_date_date_key .................................. [RUN]
+[2026-08-11T06:55:45.675814Z] INFO - [0m06:55:45  1 of 17 START test accepted_values_dim_products_key_tier__upc__sku__hash__unknown  [RUN]
+[2026-08-11T06:55:45.678397Z] INFO - [0m06:55:45  2 of 17 START test accepted_values_stg_prices_price_format__plain_price__unit_price__multi_buy__estimated__other  [RUN]
+[2026-08-11T06:55:46.223240Z] INFO - [0m06:55:46  1 of 17 PASS accepted_values_dim_products_key_tier__upc__sku__hash__unknown .... [[32mPASS[0m in 0.54s]
+[2026-08-11T06:55:46.230199Z] INFO - [0m06:55:46  5 of 17 START test not_null_dim_products_product_key ........................... [RUN]
+[2026-08-11T06:55:46.521802Z] INFO - [0m06:55:46  5 of 17 PASS not_null_dim_products_product_key ................................. [[32mPASS[0m in 0.29s]
+[2026-08-11T06:55:46.527233Z] INFO - [0m06:55:46  6 of 17 START test not_null_dim_products_vendor ................................ [RUN]
+[2026-08-11T06:55:46.802164Z] INFO - [0m06:55:46  6 of 17 PASS not_null_dim_products_vendor ...................................... [[32mPASS[0m in 0.27s]
+[2026-08-11T06:55:46.807587Z] INFO - [0m06:55:46  7 of 17 START test not_null_fct_prices_date_key ................................ [RUN]
+[2026-08-11T06:55:47.030782Z] INFO - [0m06:55:47  7 of 17 PASS not_null_fct_prices_date_key ...................................... [[32mPASS[0m in 0.22s]
+[2026-08-11T06:55:47.036786Z] INFO - [0m06:55:47  8 of 17 START test not_null_fct_prices_is_valid_price .......................... [RUN]
+[2026-08-11T06:55:47.076994Z] INFO - [0m06:55:47  4 of 17 PASS not_null_dim_date_full_date ....................................... [[32mPASS[0m in 1.40s]
+[2026-08-11T06:55:47.083540Z] INFO - [0m06:55:47  9 of 17 START test not_null_fct_prices_product_key ............................. [RUN]
+[2026-08-11T06:55:47.149409Z] INFO - [0m06:55:47  3 of 17 PASS not_null_dim_date_date_key ........................................ [[32mPASS[0m in 1.47s]
+[2026-08-11T06:55:47.155952Z] INFO - [0m06:55:47  10 of 17 START test not_null_stg_prices_is_on_sale ............................. [RUN]
+[2026-08-11T06:55:47.286121Z] INFO - [0m06:55:47  8 of 17 PASS not_null_fct_prices_is_valid_price ................................ [[32mPASS[0m in 0.25s]
+[2026-08-11T06:55:47.291788Z] INFO - [0m06:55:47  11 of 17 START test not_null_stg_prices_observed_at ............................ [RUN]
+[2026-08-11T06:55:47.632503Z] INFO - [0m06:55:47  9 of 17 PASS not_null_fct_prices_product_key ................................... [[32mPASS[0m in 0.55s]
+[2026-08-11T06:55:47.637753Z] INFO - [0m06:55:47  12 of 17 START test not_null_stg_prices_product_daily_id ....................... [RUN]
+[2026-08-11T06:55:54.772356Z] INFO - [0m06:55:54  12 of 17 PASS not_null_stg_prices_product_daily_id ............................. [[32mPASS[0m in 7.13s]
+[2026-08-11T06:55:54.778265Z] INFO - [0m06:55:54  13 of 17 START test not_null_stg_products_product_daily_id ..................... [RUN]
+[2026-08-11T06:55:55.168775Z] INFO - [0m06:55:55  13 of 17 PASS not_null_stg_products_product_daily_id ........................... [[32mPASS[0m in 0.39s]
+[2026-08-11T06:55:55.174045Z] INFO - [0m06:55:55  14 of 17 START test relationships_fct_prices_date_key__date_key__ref_dim_date_ . [RUN]
+[2026-08-11T06:55:55.993537Z] INFO - [0m06:55:55  14 of 17 PASS relationships_fct_prices_date_key__date_key__ref_dim_date_ ....... [[32mPASS[0m in 0.82s]
+[2026-08-11T06:55:55.999803Z] INFO - [0m06:55:55  15 of 17 START test relationships_fct_prices_product_key__product_key__ref_dim_products_  [RUN]
+[2026-08-11T06:55:57.354207Z] INFO - [0m06:55:57  15 of 17 PASS relationships_fct_prices_product_key__product_key__ref_dim_products_  [[32mPASS[0m in 1.35s]
+[2026-08-11T06:55:57.360267Z] INFO - [0m06:55:57  16 of 17 START test unique_dim_date_date_key ................................... [RUN]
+[2026-08-11T06:55:57.580939Z] INFO - [0m06:55:57  16 of 17 PASS unique_dim_date_date_key ......................................... [[32mPASS[0m in 0.22s]
+[2026-08-11T06:55:57.586085Z] INFO - [0m06:55:57  17 of 17 START test unique_dim_products_product_key ............................ [RUN]
+[2026-08-11T06:55:57.853628Z] INFO - [0m06:55:57  17 of 17 PASS unique_dim_products_product_key .................................. [[32mPASS[0m in 0.27s]
+[2026-08-11T06:55:58.115505Z] INFO - [0m06:55:58  11 of 17 PASS not_null_stg_prices_observed_at .................................. [[32mPASS[0m in 10.82s]
+[2026-08-11T06:56:14.507965Z] INFO - [0m06:56:14  10 of 17 PASS not_null_stg_prices_is_on_sale ................................... [[32mPASS[0m in 27.35s]
+[2026-08-11T06:56:19.202088Z] INFO - [0m06:56:19  2 of 17 PASS accepted_values_stg_prices_price_format__plain_price__unit_price__multi_buy__estimated__other  [[32mPASS[0m in 33.51s]
+[2026-08-11T06:56:20.276863Z] INFO - [0m06:56:20
+[2026-08-11T06:56:20.278602Z] INFO - [0m06:56:20  Finished running 17 data tests in 0 hours 0 minutes and 37.07 seconds (37.07s).
+[2026-08-11T06:56:20.422251Z] INFO - [0m06:56:20
+[2026-08-11T06:56:20.424119Z] INFO - [0m06:56:20  [32mCompleted successfully[0m
+[2026-08-11T06:56:20.426091Z] INFO - [0m06:56:20
+[2026-08-11T06:56:20.427931Z] INFO - [0m06:56:20  Done. PASS=17 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=17
+[2026-08-11T06:56:22.046767Z] INFO - Command exited with return code 0
+[2026-08-11T06:56:22.047634Z] INFO - ::group::Post Execute
+[2026-08-11T06:56:22.048080Z] INFO - Pushing xcom ti=RuntimeTaskInstance(id=UUID('019fef8c-b41a-7248-add8-8b0e467f630b'), task_id='dbt_test', dag_id='grocery_pipeline', run_id='manual__2026-08-11T06:40:03.579569+00:00', try_number=1, dag_version_id=UUID('019fef72-3180-75f3-940e-dca50bd82cd5'), map_index=-1, hostname='LAPTOP-PGSDKFT4.localdomain', context_carrier={'traceparent': '00-489e0190c186e9f42fbf0eedfe60b42d-7fbc0666375139ef-00'}, queue='default', task=<Task(BashOperator): dbt_test>, bundle_instance=LocalDagBundle(name=dags-folder), max_tries=0, start_date=datetime.datetime(2026, 8, 11, 6, 55, 37, 248598, tzinfo=datetime.timezone.utc), end_date=None, state=<TaskInstanceState.RUNNING: 'running'>, is_mapped=False, rendered_map_index=None, sentry_integration='') 
+[2026-08-11T06:56:22.094760Z] INFO - ::endgroup::

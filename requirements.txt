@@ -1,0 +1,5 @@
+dbt-snowflake==1.12.0
+snowflake-connector-python[pandas]==4.7.2
+pandas==2.3.3
+requests==2.34.2
+python-dotenv==1.2.2

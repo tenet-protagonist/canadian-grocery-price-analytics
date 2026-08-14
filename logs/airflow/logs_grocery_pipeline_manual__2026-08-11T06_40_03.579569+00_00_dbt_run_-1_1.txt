@@ -1,0 +1,40 @@
+::group::Log message source details
+/home/linko/airflow/logs/dag_id=grocery_pipeline/run_id=manual__2026-08-11T06:40:03.579569+00:00/task_id=dbt_run/attempt=1.log
+::endgroup::
+[2026-08-11T06:54:47.330783Z] INFO - ::group::Pre Execute
+Task Identity ti_id=019fef8c-b419-781e-9481-eb0c9ff22907 dag_id=grocery_pipeline task_id=dbt_run run_id=manual__2026-08-11T06:40:03.579569+00:00 try_number=1 map_index=-1
+[2026-08-11T06:54:47.691484Z] INFO - DAG bundles loaded: dags-folder
+[2026-08-11T06:54:47.703138Z] INFO - Filling up the DagBag from /home/linko/airflow/dags/grocery_pipeline.py
+[2026-08-11T06:54:47.736929Z] INFO - Worker startup parse complete bundle_name=dags-folder  bundle_version=null  dag_file=grocery_pipeline.py  bundle_prepare_ms=14  dag_file_parse_ms=34 
+[2026-08-11T06:54:47.774335Z] INFO - ::endgroup::
+[2026-08-11T06:54:47.775433Z] INFO - Tmp dir root location: /tmp
+[2026-08-11T06:54:47.776164Z] INFO - Running command: ['/usr/bin/bash', '-c', 'cd /mnt/d/Github/canadian-grocery-price-analytics/dbt && set -a && . /mnt/d/Github/canadian-grocery-price-analytics/.env && set +a && export DBT_PROFILES_DIR=/mnt/d/Github/canadian-grocery-price-analytics/dbt && /home/linko/pipeline-venv/bin/dbt run']
+[2026-08-11T06:54:47.777547Z] INFO - Output:
+[2026-08-11T06:54:50.301376Z] INFO - [0m06:54:50  Running with dbt=1.12.0
+[2026-08-11T06:54:51.674117Z] INFO - [0m06:54:51  Registered adapter: snowflake=1.12.0
+[2026-08-11T06:54:53.256231Z] INFO - [0m06:54:53  Found 6 models, 17 data tests, 2 sources, 661 macros
+[2026-08-11T06:54:53.263749Z] INFO - [0m06:54:53
+[2026-08-11T06:54:53.265612Z] INFO - [0m06:54:53  Concurrency: 4 threads (target='dev')
+[2026-08-11T06:54:53.267265Z] INFO - [0m06:54:53
+[2026-08-11T06:54:55.535515Z] INFO - [0m06:54:55  1 of 6 START sql table model ANALYTICS.dim_date ................................ [RUN]
+[2026-08-11T06:54:55.540894Z] INFO - [0m06:54:55  2 of 6 START sql view model ANALYTICS.stg_prices ............................... [RUN]
+[2026-08-11T06:54:55.543329Z] INFO - [0m06:54:55  3 of 6 START sql view model ANALYTICS.stg_products ............................. [RUN]
+[2026-08-11T06:54:56.596428Z] INFO - [0m06:54:56  1 of 6 OK created sql table model ANALYTICS.dim_date ........................... [[32mSUCCESS 922[0m in 1.06s]
+[2026-08-11T06:54:56.956145Z] INFO - [0m06:54:56  3 of 6 OK created sql view model ANALYTICS.stg_products ........................ [[32mSUCCESS 1[0m in 1.40s]
+[2026-08-11T06:54:56.962056Z] INFO - [0m06:54:56  4 of 6 START sql view model ANALYTICS.int_products ............................. [RUN]
+[2026-08-11T06:54:57.589509Z] INFO - [0m06:54:57  2 of 6 OK created sql view model ANALYTICS.stg_prices .......................... [[32mSUCCESS 1[0m in 2.04s]
+[2026-08-11T06:54:57.795706Z] INFO - [0m06:54:57  4 of 6 OK created sql view model ANALYTICS.int_products ........................ [[32mSUCCESS 1[0m in 0.83s]
+[2026-08-11T06:54:57.804570Z] INFO - [0m06:54:57  5 of 6 START sql table model ANALYTICS.dim_products ............................ [RUN]
+[2026-08-11T06:54:57.807378Z] INFO - [0m06:54:57  6 of 6 START sql table model ANALYTICS.fct_prices .............................. [RUN]
+[2026-08-11T06:54:58.910180Z] INFO - [0m06:54:58  5 of 6 OK created sql table model ANALYTICS.dim_products ....................... [[32mSUCCESS 189483[0m in 1.10s]
+[2026-08-11T06:55:33.669358Z] INFO - [0m06:55:33  6 of 6 OK created sql table model ANALYTICS.fct_prices ......................... [[32mSUCCESS 70181877[0m in 35.86s]
+[2026-08-11T06:55:34.448199Z] INFO - [0m06:55:34
+[2026-08-11T06:55:34.452438Z] INFO - [0m06:55:34  Finished running 3 table models, 3 view models in 0 hours 0 minutes and 41.18 seconds (41.18s).
+[2026-08-11T06:55:34.668892Z] INFO - [0m06:55:34
+[2026-08-11T06:55:34.672644Z] INFO - [0m06:55:34  [32mCompleted successfully[0m
+[2026-08-11T06:55:34.675411Z] INFO - [0m06:55:34
+[2026-08-11T06:55:34.678255Z] INFO - [0m06:55:34  Done. PASS=6 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=6
+[2026-08-11T06:55:36.161039Z] INFO - Command exited with return code 0
+[2026-08-11T06:55:36.161737Z] INFO - ::group::Post Execute
+[2026-08-11T06:55:36.162148Z] INFO - Pushing xcom ti=RuntimeTaskInstance(id=UUID('019fef8c-b419-781e-9481-eb0c9ff22907'), task_id='dbt_run', dag_id='grocery_pipeline', run_id='manual__2026-08-11T06:40:03.579569+00:00', try_number=1, dag_version_id=UUID('019fef72-3180-75f3-940e-dca50bd82cd5'), map_index=-1, hostname='LAPTOP-PGSDKFT4.localdomain', context_carrier={'traceparent': '00-489e0190c186e9f42fbf0eedfe60b42d-7fbc0666375139ef-00'}, queue='default', task=<Task(BashOperator): dbt_run>, bundle_instance=LocalDagBundle(name=dags-folder), max_tries=0, start_date=datetime.datetime(2026, 8, 11, 6, 54, 47, 365079, tzinfo=datetime.timezone.utc), end_date=None, state=<TaskInstanceState.RUNNING: 'running'>, is_mapped=False, rendered_map_index=None, sentry_integration='') 
+[2026-08-11T06:55:36.208003Z] INFO - ::endgroup::
